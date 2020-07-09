@@ -49,9 +49,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A6E8E2CB24B5E08C00C79B23 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		A6E8E2CC24B5E08C00C79B23 /* Graph2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Graph2.txt; sourceTree = "<group>"; };
-		A6E8E2CD24B5E08C00C79B23 /* Graph1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Graph1.txt; sourceTree = "<group>"; };
+		A6736D1C24B7A33400250C65 /* Graph2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Graph2.txt; sourceTree = "<group>"; };
+		A6736D1D24B7A33400250C65 /* Graph1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Graph1.txt; sourceTree = "<group>"; };
 		DB076C8A202A34C500386052 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		DB31989E20334078008ACD56 /* Simulation.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Simulation.txt; path = ../config/Simulation.txt; sourceTree = "<group>"; };
 		DB3198A320334078008ACD56 /* QuadPhysicalParams.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = QuadPhysicalParams.txt; path = ../config/QuadPhysicalParams.txt; sourceTree = "<group>"; };
@@ -159,12 +158,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A6E8E2CA24B5E08C00C79B23 /* log */ = {
+		A6736D1B24B7A33400250C65 /* log */ = {
 			isa = PBXGroup;
 			children = (
-				A6E8E2CB24B5E08C00C79B23 /* .gitignore */,
-				A6E8E2CC24B5E08C00C79B23 /* Graph2.txt */,
-				A6E8E2CD24B5E08C00C79B23 /* Graph1.txt */,
+				A6736D1C24B7A33400250C65 /* Graph2.txt */,
+				A6736D1D24B7A33400250C65 /* Graph1.txt */,
 			);
 			name = log;
 			path = ../config/log;
@@ -183,6 +181,7 @@
 				DB953DA52097BC4400B82E7B /* 08_PredictState.txt */,
 				DB953DA72097BC4400B82E7B /* 09_PredictCovariance.txt */,
 				DB953DA82097BC4400B82E7B /* 10_MagUpdate.txt */,
+				A6736D1B24B7A33400250C65 /* log */,
 				DB953DAE2097BC4500B82E7B /* 11_GPSUpdate.txt */,
 				DB3198A320334078008ACD56 /* QuadPhysicalParams.txt */,
 				DBD204F9203636AA00E0F55A /* QuadControlParams.txt */,
@@ -190,7 +189,6 @@
 				DB56307120743A1A0070F86B /* SimulatedSensors.txt */,
 				DB31989E20334078008ACD56 /* Simulation.txt */,
 				DBD204F5203636AA00E0F55A /* Scenarios.txt */,
-				A6E8E2CA24B5E08C00C79B23 /* log */,
 			);
 			name = config;
 			sourceTree = "<group>";
