@@ -24,7 +24,7 @@ In order to complete the building of the estimator, we need to go through and co
 In this section, we the sensor noise deviation for the GPS x signal and the IMU accelerometer x signal logs and compute the standard deviation of each signal.
 The calculations and results are in this [jupyter notebook ](https://github.com/bwassim/FCND-3D-Estimation/tree/master/FCND-Estimation-CPP/jupyter-notebook)
 
-<img src="./images/senso.gif" width=650/>
+<img src="./images/sensor.gif" width=650/>
 
 `
 PASS: ABS(Quad.GPS.X-Quad.Pos.X) was less than MeasuredStdDev_GPSPosXY for 68% of the time 
@@ -43,12 +43,16 @@ The predicted pitch and predicted roll are now updated with respect to the trans
 
 With the previous transformation we obtain the result in the following animation 
 
-<img src="./images/attitude_estimation.gif" width=650 />
+<img src="./images/attitude_estimation.gi" width=650 />
 
 ### Step3: Prediction Step
 Run scenario 08_PredictState. This scenario is configured to use a perfect IMU (only an IMU). Due to the sensitivity of double-integration to attitude errors, we've made the accelerometer update very insignificant (QuadEstimatorEKF.attitudeTau = 100). The plots on this simulation show element of your estimated state and that of the true state. At the moment you should see that your estimated state does not follow the true state.
 
-In this section we want to initially implement the prediction step of our EKF filter. The state prediction step is implemented in []()
+In this section we want to initially implement the prediction step of our EKF filter. The state prediction step is implemented in [FCND-Estimation-CPP/src/QuadEstimatorEKF::PredictState](https://github.com/bwassim/FCND-3D-Estimation/blob/aab30c1da582a3c4dd4f18ce0e2efd2ca8373f50/FCND-Estimation-CPP/src/QuadEstimatorEKF.cpp#L179-L185). It can observed from the simulation below that the estimated state tracks the actual state with small error. 
 
 <img src="./images/prediction.gif" width=650 />
 
+The previous simulation used a perfect IMU. This time we would like to introduce some realistic IMU by introducing some noise.
+
+<img src="./images/xest10.jpg" width=320 />
+<img src="./images/v_est10.jpg" width=320 />
