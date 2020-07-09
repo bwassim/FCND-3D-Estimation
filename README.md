@@ -54,5 +54,4 @@ In this section we want to initially implement the prediction step of our EKF fi
 
 The previous simulation used a perfect IMU. This time we would like to introduce some realistic IMU by introducing some noise.
 
-<img src="./images/xest10.jpg" width=320 />
-<img src="./images/v_est10.jpg" width=320 />
+<img src="./images/xv_est10.jpg" />
