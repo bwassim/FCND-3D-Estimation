@@ -89,13 +89,27 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
   //       (Quaternion<float> also has a IntegrateBodyRate function, though this uses quaternions, not Euler angles)
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-  // SMALL ANGLE GYRO INTEGRATION:
-  // (replace the code below)
-  // make sure you comment it out when you add your own code -- otherwise e.g. you might integrate yaw twice
-
-  float predictedPitch = pitchEst + dtIMU * gyro.y;
-  float predictedRoll = rollEst + dtIMU * gyro.x;
-  ekfState(6) = ekfState(6) + dtIMU * gyro.z;	// yaw
+  // ANY ANGLE GYRO INTEGRATION:
+    
+  // Nonlinear complementary filter
+  // convert the p, q, r angles to inertial frame
+  
+  Mat3x3F R = Mat3x3F::Zeros();
+  R(0,0) = 1;
+  R(0,1) = sin(rollEst) * tan(pitchEst);
+  R(0,2) = cos(rollEst) * tan(pitchEst);
+  R(1,1) = cos(rollEst);
+  R(1,2) = -sin(rollEst);
+  R(2,1) = sin(rollEst) / cos(pitchEst);
+  R(2,2) = cos(rollEst) / cos(pitchEst);
+    
+  
+  // convert the body rates from gyro to angular velocities in inertial frame
+  V3F ang_dot = R * gyro;
+    
+  float predictedPitch = pitchEst + dtIMU * ang_dot.y;
+  float predictedRoll = rollEst + dtIMU * ang_dot.x;
+  ekfState(6) = ekfState(6) + dtIMU * ang_dot.z;	// yaw
 
   // normalize yaw to -pi .. pi
   if (ekfState(6) > F_PI) ekfState(6) -= 2.f*F_PI;
@@ -108,8 +122,8 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
   accelPitch = atan2f(-accel.x, 9.81f);
 
   // FUSE INTEGRATION AND UPDATE
-  rollEst = attitudeTau / (attitudeTau + dtIMU) * (predictedRoll)+dtIMU / (attitudeTau + dtIMU) * accelRoll;
-  pitchEst = attitudeTau / (attitudeTau + dtIMU) * (predictedPitch)+dtIMU / (attitudeTau + dtIMU) * accelPitch;
+  rollEst = attitudeTau / (attitudeTau + dtIMU) * (predictedRoll) + dtIMU / (attitudeTau + dtIMU) * accelRoll;
+  pitchEst = attitudeTau / (attitudeTau + dtIMU) * (predictedPitch) + dtIMU / (attitudeTau + dtIMU) * accelPitch;
 
   lastGyro = gyro;
 }
@@ -159,10 +173,18 @@ VectorXf QuadEstimatorEKF::PredictState(VectorXf curState, float dt, V3F accel, 
   // - the yaw integral is already done in the IMU update. Be sure not to integrate it again here
 
   Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, curState(6));
+    
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-
-
+    predictedState(0) = curState(0) + dt * curState(3);
+    predictedState(1) = curState(1) + dt * curState(4);
+    predictedState(2) = curState(2) + dt * curState(5);
+    V3F acc_g = attitude.Rotate_BtoI(accel);
+    predictedState(3) = curState(3) + dt * acc_g.x;
+    predictedState(4) = curState(4) + dt * acc_g.y;
+    predictedState(5) = curState(5) + dt * acc_g.z - dt * CONST_GRAVITY;
+    
+//    predictedState(3) = accel.
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   return predictedState;
