@@ -210,7 +210,20 @@ MatrixXf QuadEstimatorEKF::GetRbgPrime(float roll, float pitch, float yaw)
   //   that your calculations are reasonable
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-
+    float cos_Theta = cos(pitch);
+    float sin_Psi = sin(yaw);
+    float cos_Psi = cos(yaw);
+    float sin_Phi = sin(roll);
+    float sin_Theta = sin(pitch);
+    float cos_Phi = cos(roll);
+    
+    RbgPrime(0,0) = -cos_Theta * sin_Phi;
+    RbgPrime(0,1) = -sin_Phi * sin_Theta * sin_Psi - cos_Phi * cos_Psi;
+    RbgPrime(0,2) = -cos_Phi * sin_Theta * sin_Psi + sin_Phi * cos_Psi;
+    RbgPrime(1,0) = cos_Phi * cos_Psi;
+    RbgPrime(1,1) = sin_Phi * sin_Theta * cos_Psi - cos_Phi * sin_Psi;
+    RbgPrime(1,2) = cos_Phi * sin_Theta * cos_Psi + sin_Phi * sin_Psi;
+    
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
@@ -256,7 +269,7 @@ void QuadEstimatorEKF::Predict(float dt, V3F accel, V3F gyro)
   gPrime.setIdentity();
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-
+  
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 

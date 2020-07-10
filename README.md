@@ -43,7 +43,7 @@ The predicted pitch and predicted roll are now updated with respect to the trans
 
 With the previous transformation we obtain the result in the following animation 
 
-<img src="./images/attitude_estimation.gi" width=650 />
+<img src="./images/attitude_estimation.gif" width=650 />
 
 ### Step3: Prediction Step
 Run scenario 08_PredictState. This scenario is configured to use a perfect IMU (only an IMU). Due to the sensitivity of double-integration to attitude errors, we've made the accelerometer update very insignificant (QuadEstimatorEKF.attitudeTau = 100). The plots on this simulation show element of your estimated state and that of the true state. At the moment you should see that your estimated state does not follow the true state.
@@ -55,3 +55,7 @@ In this section we want to initially implement the prediction step of our EKF fi
 The previous simulation used a perfect IMU. This time we would like to introduce some realistic IMU by introducing some noise.
 
 <img src="./images/xv_est10.jpg" />
+
+One can see that the value of sigma in both graphs is constant and does not change with time. It is expected since we have not implemented the part of the EKF that updates the covariance matrix, and that's what needs to be done. 
+* First  I will calculate the partial derivative of the body-to-global rotation matrix in the function `GetRbgPrime()`. 
+* Once we have that function implemented, we need to complete the rest of the prediction step (predict the state covariance forward) in `Predict()`.
