@@ -80,4 +80,15 @@ In this section we make sure we are using realistic IMU by commenting out the li
 #SimIMU.AccelStd = 0,0,0
 #SimIMU.GyroStd = 0,0,0
 ```
-We implement the EKF GPS Update in the function 
+We implement the EKF GPS Update in the function [FCND-Estimation-CPP/src/QuadEstimatorEKF::UpdateFromGPS](https://github.com/bwassim/FCND-3D-Estimation/blob/e44270fc01ab9a5ea1f9a86aa67bdb8c9ef97a9a/FCND-Estimation-CPP/src/QuadEstimatorEKF.cpp#L303-L317).
+It can be observed that the estimation position error is < 1m. We have tweaked a little some parameters in the GPS measurements std deviation to get better result. 
+
+### Step 6: Adding Your Controller
+Up to this point, we have been working with a controller that has been relaxed to work with an estimated state instead of a real state. So now, we will use our previsouly implemented controller. So we need to :
+* Replace QuadController.cpp with the controller you wrote in the last project.
+* Replace QuadControlParams.txt with the control parameters you came up with in the last project.
+The goal is to once again complete the entire simulation cycle with an estimated position error of < 1m.
+
+<img src="./images/dd.gif" />
+
+The simulation above shows the result of the full controller/estimator implementation. The control parameters used in the previous project was good enough to produce the simulation above.
