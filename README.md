@@ -91,4 +91,4 @@ The goal is to once again complete the entire simulation cycle with an estimated
 
 <img src="./images/dd.gif" />
 
-The simulation above shows the result of the full controller/estimator implementation. The control parameters used in the previous project was good enough to produce the simulation above.
+The simulation above shows the result of the full controller/estimator implementation. The control parameters used in the previous project was good enough to produce the simulation above.   
