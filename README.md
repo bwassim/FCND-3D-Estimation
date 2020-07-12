@@ -64,11 +64,20 @@ One can see that the value of sigma in both graphs is constant and does not chan
 
 Note that we have decreased the standard deviation for `QVelXYStd` to capture closely the magnitude of the error.
 
-## Step 4: Magnetometer Update
+### Step 4: Magnetometer Update
 Up until now we have only used the acceloremeter and gyro for our state estimation. In this section, we will be adding the information from the magnetometer to improve the the filter's heading precision. The yaw update given the sensor measurement is implemented in [FCND-Estimation-CPP/src/QuadEstimatorEKF::UpdateFromMag](https://github.com/bwassim/FCND-3D-Estimation/blob/1110cb2a3c17768b815d3f4cd5733218946d914d/FCND-Estimation-CPP/src/QuadEstimatorEKF.cpp#L324-L333). 
 
 <img src="./images/yaw.gif" />
 
 Note that our error is less that 0.1 rad in heading for at least 10 seconds as required.
 
-###
+### Step5: Closed Loop + GPS Update
+
+<img src="./images/gps.gif" />
+
+In this section we make sure we are using realistic IMU by commenting out the lines in `config/11_GPSUpdate.txt:
+```
+#SimIMU.AccelStd = 0,0,0
+#SimIMU.GyroStd = 0,0,0
+```
+We implement the EKF GPS Update in the function 

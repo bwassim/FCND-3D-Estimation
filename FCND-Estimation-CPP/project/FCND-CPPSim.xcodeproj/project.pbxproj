@@ -181,7 +181,6 @@
 				DB953DA52097BC4400B82E7B /* 08_PredictState.txt */,
 				DB953DA72097BC4400B82E7B /* 09_PredictCovariance.txt */,
 				DB953DA82097BC4400B82E7B /* 10_MagUpdate.txt */,
-				A6736D1B24B7A33400250C65 /* log */,
 				DB953DAE2097BC4500B82E7B /* 11_GPSUpdate.txt */,
 				DB3198A320334078008ACD56 /* QuadPhysicalParams.txt */,
 				DBD204F9203636AA00E0F55A /* QuadControlParams.txt */,
@@ -189,6 +188,7 @@
 				DB56307120743A1A0070F86B /* SimulatedSensors.txt */,
 				DB31989E20334078008ACD56 /* Simulation.txt */,
 				DBD204F5203636AA00E0F55A /* Scenarios.txt */,
+				A6736D1B24B7A33400250C65 /* log */,
 			);
 			name = config;
 			sourceTree = "<group>";
