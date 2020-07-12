@@ -58,4 +58,17 @@ The previous simulation used a perfect IMU. This time we would like to introduce
 
 One can see that the value of sigma in both graphs is constant and does not change with time. It is expected since we have not implemented the part of the EKF that updates the covariance matrix, and that's what needs to be done. 
 * First  I will calculate the partial derivative of the body-to-global rotation matrix in the function `GetRbgPrime()`. 
-* Once we have that function implemented, we need to complete the rest of the prediction step (predict the state covariance forward) in `Predict()`.
+* Once we have that function implemented, we need to complete the rest of the prediction step (predict the state covariance forward) in `Predict()`. After completing the covariance update in [FCND-Estimation-CPP/src/QuadEstimatorEKF::Predict](https://github.com/bwassim/FCND-3D-Estimation/blob/85dcdc7bc56e1c57b244cb95e3df4c3fe403ada7/FCND-Estimation-CPP/src/QuadEstimatorEKF.cpp#L265-L282), we obtain the following simulation 
+
+<img src="./images/covariance_update.gif" />
+
+Note that we have decreased the standard deviation for `QVelXYStd` to capture closely the magnitude of the error.
+
+## Step 4: Magnetometer Update
+Up until now we have only used the acceloremeter and gyro for our state estimation. In this section, we will be adding the information from the magnetometer to improve the the filter's heading precision. The yaw update given the sensor measurement is implemented in [FCND-Estimation-CPP/src/QuadEstimatorEKF::UpdateFromMag](https://github.com/bwassim/FCND-3D-Estimation/blob/1110cb2a3c17768b815d3f4cd5733218946d914d/FCND-Estimation-CPP/src/QuadEstimatorEKF.cpp#L324-L333). 
+
+<img src="./images/yaw.gif" />
+
+Note that our error is less that 0.1 rad in heading for at least 10 seconds as required.
+
+###
